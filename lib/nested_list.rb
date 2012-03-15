@@ -1,11 +1,12 @@
 # encoding: utf-8
-require "nested_list/nested_select"
+$:.push File.expand_path("../", __FILE__)
+require "nested_list/nested_select/item"
+require "nested_list/nested_select/tree"
 require "active_support/inflector"
 
 module Generator
 
   class NestedList
-  include NestedSelect
     # Get Array of nested names:
     #[{name: "All Categories", id: 'all'},
     # {name: "Audio", id: '1'},
@@ -15,53 +16,15 @@ module Generator
     # {name: "Baby", id: '44245tr5'}]
     def initialize(nested_names_arr)
       @nested_names_arr = nested_names_arr
+      @tree = NestedSelect::Tree.new
+      @nested_names_arr.each do |h|
+        @tree.add_item(NestedSelect::Item.new(h[:name],h[:id]))
+      end
     end
 
     #Return a list of nested html_options from nested names array
     def html_options
-       @wraped_list =  {}
-    list = NestedSelect::List.new("root", nil)
-
-    @nested_names_arr.each do |retailer_category|
-      @names = retailer_category[:name].split(">")
-      point = list
-      length = @names.length - 1
-      @names.each_with_index do |name, level|
-         id = retailer_category[:id]
-         full_name = parameterized_name(@names[0..level])
-         if  exist_node=list.find_by_name(full_name)
-           # Use existed name
-           if  exist_node.full_name!=full_name && length != level
-
-             found_item = exist_node.find_item(name)
-             moved_item = found_item
-
-             exist_node.remove_item(found_item)
-             item = NestedSelect::List.new(name, nil)
-             item.add_item(moved_item)
-             exist_node.add_item(item)
-             point = item
-           else
-             point = exist_node
-           end
-
-         else
-          # Create new node
-          unless (level == length)
-            item = NestedSelect::List.new(name, nil)
-            item.add_item(NestedSelect::Item.new(name, nil))
-          else
-            item = NestedSelect::Item.new(name, id)
-          end
-
-          point.add_item(item)
-          point = item
-         end
-     end
-
-    end
-
-    @wraped_list = list.wrap
+      @tree.html
     end
   end
 

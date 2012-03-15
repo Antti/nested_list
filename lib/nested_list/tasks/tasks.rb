@@ -20,10 +20,9 @@ module NestedList
       </body>
       </html>
       EOF
-      mkdir_p "lib/public/"
-      puts "cd lib/public/"
+      #mkdir_p "lib/public/"
       puts "File nested_list.html preparing..."
-      File.open("lib/public/nested_list.html", "w") do |f|        
+      File.open("lib/public/nested_list.html", "w") do |f|
         f.puts template.result(binding)
       end
       puts "lib/public/nested_list.html was created"
