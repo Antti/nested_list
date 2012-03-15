@@ -78,7 +78,7 @@ module Generator
     nested_list.html_options
   end
 
-  #Support other language
+  #Support other languages
   # Example
   def nested_options_example_ru
     @nested_names_arr = []
