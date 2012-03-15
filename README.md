@@ -6,7 +6,7 @@ nested_list gem is a tool for creating nested cross browser drop downs. It doesn
 Install
 =======
 
-`gem install nested_list`
+ `gem install nested_list`
 
 OR
 
