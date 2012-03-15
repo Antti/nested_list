@@ -21,13 +21,13 @@ Example of usage
 
 Array with nested options which using ">" as a delimiter
 
-	    @nested_names_arr = []
+      @nested_names_arr = []
       @nested_names_arr << {name: "All Categories", id: 'all'}
-		  @nested_names_arr << {name: "Audio", id: '1'}
-  		@nested_names_arr << {name: "Audio>Accessorize>Smile", id: '566767'}
-  		@nested_names_arr << {name: "Audio>Accessorize>Pillow", id: '45255'}
-  		@nested_names_arr << {name: "Audio>DVD", id: '234245'}
-  		@nested_names_arr << {name: "Baby", id: '44245tr5'}
+      @nested_names_arr << {name: "Audio", id: '1'}
+      @nested_names_arr << {name: "Audio>Accessorize>Smile", id: '566767'}
+      @nested_names_arr << {name: "Audio>Accessorize>Pillow", id: '45255'}
+      @nested_names_arr << {name: "Audio>DVD", id: '234245'}
+      @nested_names_arr << {name: "Baby", id: '44245tr5'}
 
 Pass it as a parameter and get options for drop down as an output
 
