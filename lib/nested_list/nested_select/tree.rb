@@ -14,6 +14,7 @@ module NestedSelect
       node = root_node
       levels = []
       item.levels.each.with_index do |level_name, level|
+        level_name = "unknown category" if level_name.blank? #Empty level_name causing error in  NestedSelect::Item#level method.
         levels << level_name
         if node[level_name]
           node[level_name].content = item if node[level_name].content.virtual? && level == item.level
