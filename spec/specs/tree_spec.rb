@@ -5,15 +5,10 @@ describe NestedSelect::Tree do
     subject.root_node.should_not be_nil
   end
 
-  it "adds item to a tree" do
-    item = NestedSelect::Item.new("a",25)
-    subject.add_item(item)
-  end
-
   it "puts item into root node if item level is 0" do
     item = NestedSelect::Item.new("a",25)
     subject.add_item(item)
-    subject.root_node["a"] == item
+    subject.root_node["a"].should be
   end
 
   context "empty root" do
@@ -32,6 +27,12 @@ describe NestedSelect::Tree do
     item2 = NestedSelect::Item.new("a>b>x",20)
     subject.add_item(item2)
     subject.root_node["a"]["b"]["x"].content.should == item2
+  end
+
+  it "adds item with blank name and substitutes it to 'unknown category'" do
+    item = NestedSelect::Item.new(">b>c",25)
+    subject.add_item(item)
+    subject.root_node["unknown category"]["b"]["c"].content.should be
   end
 
   it "replaces virtual item with real one" do
