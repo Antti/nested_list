@@ -8,7 +8,7 @@ describe NestedSelect::Tree do
   it "puts item into root node if item level is 0" do
     item = NestedSelect::Item.new("a",25)
     subject.add_item(item)
-    subject.root_node["a"].should be
+    subject.root_node["a"].content.should eq(item)
   end
 
   context "empty root" do
